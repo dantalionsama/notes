@@ -1,13 +1,12 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "name": "Notes",
   "identifier": "notes",
   "author": "dantalionsama",
   "github": "https://github.com/dantalionsama/notes",
   "homepage": "https://github.com/dantalionsama/notes",
-  "description": "A persistent floating notebook. Multiple named pages, autosave, lives alongside any chat.",
+  "description": "A persistent floating notebook. Multiple named pages, autosave.",
   "permissions": [
-    "storage",
     "ui_panels"
   ],
   "entry_backend": "dist/backend.js",

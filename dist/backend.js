@@ -1,5 +1,4 @@
 // danny notebook — Backend
-// Handles persistent storage of pages. No macros, no AI integration.
 
 const STORAGE_KEY = "notebook.json";
 
@@ -16,15 +15,11 @@ async function save(data) {
   await spindle.storage.setJson(STORAGE_KEY, data, { indent: 2 });
 }
 
-// ─── Boot ─────────────────────────────────────────────────────────────────────
-
 (async () => {
   const data = await load();
   spindle.sendToFrontend({ type: "data_loaded", data });
   spindle.log.info("[Notebook] Ready — " + data.pages.length + " page(s)");
 })();
-
-// ─── Message router ───────────────────────────────────────────────────────────
 
 spindle.onFrontendMessage(async (payload) => {
   switch (payload.type) {
@@ -36,7 +31,6 @@ spindle.onFrontendMessage(async (payload) => {
     }
 
     case "save_page": {
-      // payload: { id, content }
       const data = await load();
       const page = data.pages.find(p => p.id === payload.id);
       if (page) {
@@ -47,7 +41,6 @@ spindle.onFrontendMessage(async (payload) => {
     }
 
     case "rename_page": {
-      // payload: { id, title }
       const data = await load();
       const page = data.pages.find(p => p.id === payload.id);
       if (page) {
@@ -69,9 +62,8 @@ spindle.onFrontendMessage(async (payload) => {
     }
 
     case "delete_page": {
-      // payload: { id }
       const data = await load();
-      if (data.pages.length <= 1) break; // always keep at least one page
+      if (data.pages.length <= 1) break;
       data.pages = data.pages.filter(p => p.id !== payload.id);
       if (data.activePage === payload.id) data.activePage = data.pages[0].id;
       await save(data);
@@ -80,7 +72,6 @@ spindle.onFrontendMessage(async (payload) => {
     }
 
     case "set_active_page": {
-      // payload: { id } — just persist which tab was last open
       const data = await load();
       data.activePage = payload.id;
       await save(data);
