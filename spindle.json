@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "name": "Notes",
+  "identifier": "notes",
+  "author": "dantalionsama",
+  "github": "https://github.com/dantalionsama/notes",
+  "homepage": "https://github.com/dantalionsama/notes",
+  "description": "A persistent floating notebook. Multiple named pages, autosave, lives alongside any chat.",
+  "permissions": [
+    "storage",
+    "ui_panels"
+  ],
+  "entry_backend": "dist/backend.js",
+  "entry_frontend": "dist/frontend.js",
+  "storage_seed_files": [
+    {
+      "from": "storage/notes",
+      "to": ".",
+      "overwrite": false,
+      "required": false
+    }
+  ],
+  "minimum_lumiverse_version": "0.9.0"
+}
