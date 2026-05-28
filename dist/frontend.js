@@ -201,9 +201,10 @@ function setup(ctx) {
     snapToEdge: true,
     tooltip: "Notebook",
     chromeless: true,
-    onMove: (pos) => {
-      try { localStorage.setItem(POSITION_KEY, JSON.stringify(pos)); } catch {}
-    },
+  });
+
+  floatWidget.onDragEnd((pos) => {
+    try { localStorage.setItem(POSITION_KEY, JSON.stringify(pos)); } catch {}
   });
 
   const root = floatWidget.root;
